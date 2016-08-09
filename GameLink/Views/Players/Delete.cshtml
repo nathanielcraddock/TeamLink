@@ -1,0 +1,65 @@
+﻿@model GameLink.Player
+
+@{
+    ViewBag.Title = "Select";
+    Layout = "~/Views/Players/_LayoutPage.cshtml";
+}
+
+<h2>Select</h2>
+
+<h3></h3>
+<div>
+    <h4>Are you sure you want to select this player?</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Name
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GamerName)
+        </dd>
+
+        <dt>
+            Game
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Game.GameName)
+        </dd>
+
+        <dt>
+            Style
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GamerStyle.GamerStyle1)
+        </dd>
+
+        <dt>
+            Platform
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Platform.PlatformName)
+        </dd>
+
+        <dt>
+            Region
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Region.Region1)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Select" class="btn btn-default" />  | 
+             @Html.ActionLink("Back to List", "Success")         
+        </div>
+    }
+</div>
