@@ -1,11 +1,28 @@
-﻿
+﻿@model GameLink.Models.SearchingPlayerModel
+
 @{
     ViewBag.Title = "Success";
     Layout = "~/Views/Players/_LayoutPage.cshtml";
 }
 
-<h2>Success!</h2>
-<p>
-    
-</p>
+<h2>Player Selected</h2>
 
+<div>
+    <h4>Matched</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Matched with:
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GamerName)
+        </dd>
+
+    </dl>
+</div>
+<div class="form-group">
+    <div class="col-md-offset-2 col-md-10">
+        <input type="button" value="Home" onclick="@("window.location.href='" + @Url.Action("Index", "Players") + "'");" class="btn btn-default" />
+    </div>
+</div>

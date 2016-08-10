@@ -11,7 +11,7 @@ namespace GameLink.Models
         public int gamerstyleid { get; set; }
         public int regionid { get; set; }
         public int platformid { get; set; }
-
+        public string GamerName { get; set; }
 
     }
 }

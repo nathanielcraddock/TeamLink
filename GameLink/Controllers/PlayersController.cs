@@ -25,7 +25,7 @@ namespace GameLink.Controllers
             var players = from p in db.Players
                               select p
                               ;
-            var searchResult = players.Where(p => p.GameID == search.gameID && p.GamerStyleID == search.gamerstyleid && p.PlatformID == search.platformid && p.RegionID == search.regionid);
+            var searchResult = players.Where(p => p.GameID == search.gameID && p.GamerStyleID == search.gamerstyleid && p.PlatformID == search.platformid && p.RegionID == search.regionid && p.GamerName != search.GamerName);
             //deleteplayer();                                          
             return View(searchResult.ToList());
         }
@@ -56,6 +56,7 @@ namespace GameLink.Controllers
                 search.platformid = player.PlatformID;
                 search.regionid = player.RegionID;
                 search.gamerstyleid = player.GamerStyleID;
+                search.GamerName = player.GamerName;
                 db.Players.Add(player);
                 db.SaveChanges();
                 return RedirectToAction("Results", search);
@@ -89,9 +90,10 @@ namespace GameLink.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             Player player = db.Players.Find(id);
+            search.GamerName = player.GamerName;
             db.Players.Remove(player);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("Success", search);
         }
 
         protected override void Dispose(bool disposing)
@@ -102,17 +104,16 @@ namespace GameLink.Controllers
             }
             base.Dispose(disposing);
         }
-        public void deleteplayer()
+        public ActionResult Success(SearchingPlayerModel search)
         {
-            search.gameID = '0';
-            search.gamerstyleid = '0';
-            search.platformid = '0';
-            search.regionid = '0';
-            return;
+            return View(search);
         }
+        //Succes post
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Success()
         {
-            return View();
+            return RedirectToAction("Index");
         }
     }
 }
